@@ -1,0 +1,55 @@
+using System;
+
+namespace Advent_of_Code_2019
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int result = 0;
+            // for every number
+            for (int i = 125730; i < 579381; i++)
+            {
+                string number = i.ToString();
+                bool decrease = false;
+                // check if none decreasing
+                for (int j = 0; j < number.Length - 1; j++)
+                {
+                    if (number[j] > number[j + 1])
+                    {
+                        decrease = true;
+                        break;
+                    }
+                }
+                if (decrease == true)
+                {
+                    continue;
+                }
+                // check if at least one repeating, but not three
+                for (int j = 0; j < number.Length - 1; j++)
+                {
+                    int repeats = 0;
+                    int current = j;
+                    for (int k = j + 1; k < number.Length; k++)
+                    {
+                        if (number[current] == number[k])
+                        {
+                            j++;
+                            repeats++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (repeats == 1)
+                    {
+                        result++;
+                        break;
+                    }
+                }
+            }
+            Console.WriteLine(result);
+        }
+    }
+}
